@@ -1,0 +1,795 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECHSTORE - Mengenal Komponen Komputer</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: #080d18;
+    color: white;
+}
+
+header {
+    background: #101827;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 20px #0008;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #00d4ff;
+    letter-spacing: 2px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 22px;
+    transition: .3s;
+}
+
+nav a:hover { color: #00d4ff; }
+
+.hero {
+    min-height: 440px;
+    padding: 75px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+    background: linear-gradient(120deg,#101827,#173858);
+}
+
+.hero-text { max-width: 550px; }
+
+.hero h1 {
+    font-size: 46px;
+    margin-bottom: 20px;
+}
+
+.hero h1 span,
+.title span { color: #00d4ff; }
+
+.hero p {
+    color: #bdc9d8;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.hero img {
+    width: 43%;
+    max-height: 320px;
+    object-fit: contain;
+    border-radius: 15px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 13px 25px;
+    border-radius: 8px;
+    background: #00bfff;
+    color: #08111d;
+    text-decoration: none;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.btn:hover {
+    background: white;
+    transform: translateY(-4px);
+}
+
+section { padding: 70px 8%; }
+
+.title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 35px;
+}
+
+.slider-box {
+    overflow: hidden;
+    position: relative;
+    border-radius: 18px;
+}
+
+.slider {
+    display: flex;
+    transition: transform .6s ease;
+}
+
+.slide {
+    min-width: 100%;
+    min-height: 320px;
+    padding: 35px 65px;
+    background: #131f32;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.slide img {
+    width: 45%;
+    height: 240px;
+    object-fit: contain;
+}
+
+.slide h2 {
+    color: #00d4ff;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.slide p {
+    color: #bdc9d8;
+    line-height: 1.8;
+}
+
+.slide button {
+    padding: 12px 25px;
+    margin-top: 20px;
+    background: #00bfff;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.arrow {
+    position: absolute;
+    top: 45%;
+    z-index: 5;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: #00bfff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #526176;
+    cursor: pointer;
+}
+
+.dot.active { background: #00d4ff; }
+
+.search-box {
+    max-width: 550px;
+    margin: 0 auto 25px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 15px 20px;
+    background: #131f32;
+    border: 1px solid #00bfff;
+    color: white;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+}
+
+.search-box input::placeholder { color: #9eafc3; }
+
+.filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 35px;
+}
+
+.filter-btn {
+    background: #17263a;
+    border: 1px solid #31435c;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: #00bfff;
+    color: #08111d;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+}
+
+.card {
+    background: #131f32;
+    border: 1px solid #273952;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: .35s;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 10px 30px #00bfff30;
+    border-color: #00bfff;
+}
+
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    padding: 15px;
+    background: #1b2b42;
+}
+
+.image-error {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #bdc9d8;
+    background: #1b2b42;
+}
+
+.info { padding: 20px; }
+
+.info h3 {
+    font-size: 19px;
+    margin-bottom: 12px;
+}
+
+.info p {
+    color: #b8c5d6;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.category {
+    display: inline-block;
+    background: #183a53;
+    color: #00d4ff;
+    font-size: 11px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+}
+
+.image-source {
+    display: inline-block;
+    margin-top: 15px;
+    color: #00d4ff;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.image-source:hover { text-decoration: underline; }
+
+.no-result {
+    text-align: center;
+    color: #bdc9d8;
+    grid-column: 1/-1;
+    padding: 35px;
+}
+
+.about {
+    background: #101827;
+    text-align: center;
+}
+
+.about p,
+.conclusion p {
+    max-width: 750px;
+    margin: auto;
+    color: #bdc9d8;
+    line-height: 1.9;
+}
+
+.conclusion { text-align: center; }
+
+footer {
+    background: #060a12;
+    padding: 30px;
+    text-align: center;
+    color: #8494aa;
+    line-height: 1.8;
+}
+
+footer span { color: #00d4ff; }
+
+@media(max-width:768px) {
+    header {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    nav a {
+        margin: 0 7px;
+        font-size: 13px;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero h1 { font-size: 35px; }
+    .hero img { width: 90%; }
+
+    .slide {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 45px;
+    }
+
+    .slide img {
+        width: 90%;
+        height: 170px;
+    }
+
+    .slide h2 { font-size: 24px; }
+    .products { grid-template-columns: 1fr; }
+    .title { font-size: 27px; }
+}
+
+@media(min-width:769px) and (max-width:1050px) {
+    .products { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">TECHSTORE.</div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#slider">Pengenalan</a>
+        <a href="#produk">Komponen</a>
+        <a href="#about">Tentang</a>
+    </nav>
+</header>
+
+<!-- HALAMAN UTAMA -->
+<div class="hero" id="home">
+    <div class="hero-text">
+        <h1>Mengenal <span>Komponen Komputer</span></h1>
+        <p>
+            Selamat datang di TECHSTORE!
+            Website edukasi untuk mengenal berbagai
+            komponen komputer, fungsi, dan cara kerjanya.
+            Yuk, pelajari teknologi komputer bersama kami!
+        </p>
+        <a href="#produk" class="btn">Mulai Belajar</a>
+    </div>
+
+    <img
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Computer_case_-_Full_Tower.jpg?width=800"
+        alt="Casing komputer">
+</div>
+
+<!-- SLIDER PENGENALAN -->
+<section id="slider">
+    <h2 class="title">Pengenalan <span>Komponen</span></h2>
+
+    <div class="slider-box">
+        <div class="slider" id="sliderTrack">
+
+            <div class="slide">
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:FilePath/HP-HP9000-PARISC-PA7300LC-CPU-Chip-Closeup-Project-VelociRaptor.jpg?width=800"
+                    alt="Processor">
+                <div>
+                    <h2>Processor (CPU)</h2>
+                    <p>
+                        Processor merupakan otak komputer
+                        yang bertugas mengolah data dan
+                        menjalankan berbagai instruksi.
+                    </p>
+                    <button onclick="location.href='#produk'">
+                        Pelajari Komponen
+                    </button>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:FilePath/Dimm.jpg?width=800"
+                    alt="RAM">
+                <div>
+                    <h2>RAM</h2>
+                    <p>
+                        RAM adalah tempat penyimpanan sementara
+                        untuk data dan program yang sedang
+                        digunakan komputer.
+                    </p>
+                    <button onclick="location.href='#produk'">
+                        Pelajari Komponen
+                    </button>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:FilePath/Computer_motherboard.jpg?width=800"
+                    alt="Motherboard">
+                <div>
+                    <h2>Motherboard</h2>
+                    <p>
+                        Motherboard merupakan papan utama
+                        yang menghubungkan seluruh perangkat
+                        keras dalam komputer.
+                    </p>
+                    <button onclick="location.href='#produk'">
+                        Pelajari Komponen
+                    </button>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:FilePath/Computer_monitor.jpg?width=800"
+                    alt="Monitor">
+                <div>
+                    <h2>Monitor</h2>
+                    <p>
+                        Monitor merupakan perangkat output
+                        yang menampilkan hasil pengolahan
+                        komputer dalam bentuk visual.
+                    </p>
+                    <button onclick="location.href='#produk'">
+                        Pelajari Komponen
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="arrow prev" onclick="moveSlide(-1)">❮</button>
+        <button class="arrow next" onclick="moveSlide(1)">❯</button>
+    </div>
+
+    <div class="dots" id="dots"></div>
+</section>
+
+<!-- DAFTAR 12 KOMPONEN -->
+<section id="produk">
+    <h2 class="title">12 Komponen <span>Komputer</span></h2>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="search"
+            placeholder="Cari nama komponen komputer..."
+            oninput="renderProducts()">
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active"
+            onclick="setFilter('Semua',this)">Semua</button>
+
+        <button class="filter-btn"
+            onclick="setFilter('Internal',this)">Komponen Internal</button>
+
+        <button class="filter-btn"
+            onclick="setFilter('Penyimpanan',this)">Penyimpanan</button>
+
+        <button class="filter-btn"
+            onclick="setFilter('Pendingin',this)">Pendingin</button>
+
+        <button class="filter-btn"
+            onclick="setFilter('Eksternal',this)">Perangkat Eksternal</button>
+    </div>
+
+    <div class="products" id="products"></div>
+</section>
+
+<!-- TENTANG -->
+<section class="about" id="about">
+    <h2 class="title">Tentang <span>TECHSTORE</span></h2>
+    <p>
+        TECHSTORE merupakan website edukasi yang dibuat
+        untuk memperkenalkan berbagai komponen komputer
+        kepada masyarakat, khususnya pelajar dan pemula.
+        Melalui website ini, pengunjung dapat mempelajari
+        nama, gambar, fungsi, dan kegunaan dari 12
+        komponen komputer.
+    </p>
+</section>
+
+<!-- KESIMPULAN -->
+<section class="conclusion">
+    <h2 class="title">Kesimpulan <span>Pembelajaran</span></h2>
+    <p>
+        Komputer terdiri dari berbagai komponen yang
+        saling bekerja sama. Setiap komponen memiliki
+        fungsi berbeda, mulai dari memproses data,
+        menyimpan informasi, menampilkan gambar,
+        hingga membantu pengguna mengoperasikan komputer.
+        Dengan memahami fungsi setiap komponen,
+        kita dapat mengenal cara kerja komputer
+        dengan lebih baik.
+    </p>
+</section>
+
+<footer>
+    <p>© 2026 <span>TECHSTORE</span>. All Rights Reserved.</p>
+    <p>Website Edukasi Komponen Komputer</p>
+</footer>
+
+<script>
+
+/* FOTO SSD YANG KAMU KIRIM */
+const ssdPhoto = "data:image/jpeg;base64,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";
+
+/* DATA 12 KOMPONEN */
+const products = [
+
+{
+    name: "Processor (CPU)",
+    category: "Internal",
+    description: "Processor adalah otak komputer yang berfungsi memproses instruksi, melakukan perhitungan, dan mengatur jalannya program.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/HP-HP9000-PARISC-PA7300LC-CPU-Chip-Closeup-Project-VelociRaptor.jpg?width=700",
+    source: "https://commons.wikimedia.org/wiki/File:HP-HP9000-PARISC-PA7300LC-CPU-Chip-Closeup-Project-VelociRaptor.jpg"
+},
+
+{
+    name: "RAM",
+    category: "Internal",
+    description: "RAM (Random Access Memory) berfungsi menyimpan data sementara dari aplikasi yang sedang berjalan agar dapat diakses dengan cepat.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Dimm.jpg?width=700",
+    source: "https://commons.wikimedia.org/wiki/File:Dimm.jpg"
+},
+
+{
+    name: "VGA Card",
+    category: "Internal",
+    description: "VGA Card atau GPU bertugas mengolah data grafis dan menghasilkan tampilan gambar pada monitor.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/ASUS_Dual_GeForce_GTX_1060_3GB_OC_Edition_-_front_view.jpg?width=700",
+    source: "https://commons.wikimedia.org/wiki/File:ASUS_Dual_GeForce_GTX_1060_3GB_OC_Edition_-_front_view.jpg"
+},
+
+{
+    name: "Motherboard",
+    category: "Internal",
+    description: "Motherboard adalah papan sirkuit utama yang menjadi tempat pemasangan dan penghubung berbagai komponen komputer.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Computer_motherboard.jpg?width=700",
+    source: "https://commons.wikimedia.org/wiki/File:Computer_motherboard.jpg"
+},
+
+{
+    name: "SSD",
+    category: "Penyimpanan",
+    description: "SSD (Solid State Drive) merupakan perangkat penyimpanan data berbasis memori flash. Bentuknya antara lain SATA 2,5 inci dan M.2 NVMe.",
+    image: ssdPhoto,
+    source: ""
+},
+
+{
+    name: "Hard Disk (HDD)",
+    category: "Penyimpanan",
+    description: "HDD (Hard Disk Drive) merupakan perangkat penyimpanan yang menggunakan piringan magnetik untuk menyimpan sistem dan file.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Hard_disk_drive_system.jpg?width=700",
+    source: "https://commons.wikimedia.org/wiki/File:Hard_disk_drive_system.jpg"
+},
+
+{
+    name: "Power Supply (PSU)",
+    category: "Internal",
+    description: "Power Supply berfungsi mengubah arus listrik dari sumber listrik menjadi daya yang dibutuhkan oleh komponen komputer.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/ATX_Computer_power_supply_unit.jpg?width=700",
+    source: "https://commons.wikimedia.org/wiki/File:ATX_Computer_power_supply_unit.jpg"
+},
+
+{
+    name: "Casing Komputer",
+    category: "Internal",
+    description: "Casing merupakan tempat untuk memasang, melindungi, dan menyusun komponen komputer agar lebih rapi dan aman.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Computer_case_-_Full_Tower.jpg?width=700",
+    source: "https://commons.wikimedia.org/wiki/File:Computer_case_-_Full_Tower.jpg"
+},
+
+{
+    name: "CPU Cooler",
+    category: "Pendingin",
+    description: "CPU Cooler berfungsi membuang panas dari processor agar suhu tetap terjaga saat komputer digunakan.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/CPU_fan_and_heatsink.jpg?width=700",
+    source: "https://commons.wikimedia.org/wiki/File:CPU_fan_and_heatsink.jpg"
+},
+
+{
+    name: "Fan Casing",
+    category: "Pendingin",
+    description: "Fan casing berfungsi mengatur sirkulasi udara di dalam casing sehingga panas dari komponen dapat dikeluarkan.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Corsair_Logo_120mm_desktop_computer_case_fan_%2852504601012%29.jpg?width=700",
+    source: "https://commons.wikimedia.org/wiki/File:Corsair_Logo_120mm_desktop_computer_case_fan_(52504601012).jpg"
+},
+
+{
+    name: "Monitor",
+    category: "Eksternal",
+    description: "Monitor merupakan perangkat output yang menampilkan hasil pengolahan komputer dalam bentuk teks, gambar, dan video.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Computer_monitor.jpg?width=700",
+    source: "https://commons.wikimedia.org/wiki/File:Computer_monitor.jpg"
+},
+
+{
+    name: "Keyboard dan Mouse",
+    category: "Eksternal",
+    description: "Keyboard digunakan untuk memasukkan teks dan perintah, sedangkan mouse digunakan untuk menggerakkan kursor dan memilih objek.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Computer_keyboard%2C_smart_card_reader%2C_and_mouse_on_a_wooden_desk.jpg?width=700",
+    source: "https://commons.wikimedia.org/wiki/File:Computer_keyboard,_smart_card_reader,_and_mouse_on_a_wooden_desk.jpg"
+}
+
+];
+
+/* MENAMPILKAN KOMPONEN */
+let activeFilter = "Semua";
+
+function renderProducts() {
+
+    const container = document.getElementById("products");
+    const search = document.getElementById("search").value.toLowerCase();
+
+    const filtered = products.filter(product => {
+
+        const matchSearch =
+            product.name.toLowerCase().includes(search) ||
+            product.description.toLowerCase().includes(search);
+
+        const matchCategory =
+            activeFilter === "Semua" ||
+            product.category === activeFilter;
+
+        return matchSearch && matchCategory;
+    });
+
+    container.innerHTML = "";
+
+    if (filtered.length === 0) {
+        container.innerHTML =
+            '<div class="no-result">Komponen tidak ditemukan.</div>';
+        return;
+    }
+
+    filtered.forEach(product => {
+
+        const sourceLink = product.source
+            ? `<a class="image-source" href="${product.source}" target="_blank" rel="noopener">Lihat sumber foto</a>`
+            : `<span class="image-source">Foto dari pengguna</span>`;
+
+        container.innerHTML += `
+            <div class="card">
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                    loading="lazy"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+                <div class="image-error" style="display:none">
+                    Gambar tidak dapat dimuat
+                </div>
+
+                <div class="info">
+                    <span class="category">${product.category}</span>
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    ${sourceLink}
+                </div>
+            </div>
+        `;
+    });
+}
+
+/* FILTER KATEGORI */
+function setFilter(category, button) {
+
+    activeFilter = category;
+
+    document.querySelectorAll(".filter-btn")
+        .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    renderProducts();
+}
+
+/* SLIDER */
+const slider = document.getElementById("sliderTrack");
+const slides = document.querySelectorAll(".slide");
+const dotsContainer = document.getElementById("dots");
+
+let currentIndex = 0;
+let autoSlide;
+
+slides.forEach((slide, index) => {
+
+    const dot = document.createElement("div");
+    dot.className = "dot";
+
+    dot.onclick = () => {
+        currentIndex = index;
+        updateSlider();
+        restartAutoSlide();
+    };
+
+    dotsContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll(".dot");
+
+function updateSlider() {
+
+    slider.style.transform =
+        `translateX(-${currentIndex * 100}%)`;
+
+    dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === currentIndex);
+    });
+}
+
+function moveSlide(direction) {
+
+    currentIndex =
+        (currentIndex + direction + slides.length) % slides.length;
+
+    updateSlider();
+    restartAutoSlide();
+}
+
+function startAutoSlide() {
+
+    autoSlide = setInterval(() => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateSlider();
+    }, 4000);
+}
+
+function restartAutoSlide() {
+    clearInterval(autoSlide);
+    startAutoSlide();
+}
+
+/* JALANKAN WEBSITE */
+renderProducts();
+updateSlider();
+startAutoSlide();
+
+</script>
+
+</body>
+</html>
